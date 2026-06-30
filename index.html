@@ -8,50 +8,68 @@
 
 <link rel="manifest" href="manifest.webmanifest">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="DASC">
 <meta name="theme-color" content="#5865F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="DASC">
+
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 
 <style>
 body {
-    font-family: system-ui, sans-serif;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f4f4f4;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background: #f5f5f5;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    padding: 20px;
 }
 
 button {
-    font-size: 20px;
-    padding: 16px 32px;
+    padding: 16px 28px;
+    font-size: 18px;
     border: none;
     border-radius: 12px;
     background: #5865F2;
     color: white;
     cursor: pointer;
 }
+
+button:hover {
+    opacity: .9;
+}
 </style>
 </head>
 
 <body>
 
-<h2>Discord Account Support Corporation</h2>
+<div class="container">
 
-<button onclick="launch()">
-🚀 Launch Group
+<h1>Discord Account Support Corporation</h1>
+
+<p>Add this launcher to your Home Screen using Safari.</p>
+
+<button id="launch">
+🚀 Launch Concorder Group
 </button>
 
+</div>
+
 <script>
-function launch() {
+document.getElementById("launch").addEventListener("click", () => {
     window.location.href =
     "https://www.concorder.net/en/group/23/discord-account-support-corporation";
-}
+});
 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
+    navigator.serviceWorker.register("./sw.js");
 }
 </script>
 
