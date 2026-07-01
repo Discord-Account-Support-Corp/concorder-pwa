@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>Discord Account Support Corporation</title>
 
@@ -10,53 +11,57 @@
 
 <meta name="theme-color" content="#007AFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DASC">
 
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 
 <style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f2f2f7;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.container{
-    text-align:center;
-    padding:20px;
+body {
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f2f2f7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+
+    overflow: hidden;
 }
 
-h1{
-    margin-bottom:10px;
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    text-align: center;
 }
 
-p{
-    color:#666;
-    margin-bottom:25px;
-}
-
-button{
-    background:#007AFF;
-    color:#fff;
-    border:none;
-    border-radius:16px;
-    padding:18px 36px;
-    font-size:20px;
-    font-weight:600;
-    cursor:pointer;
-}
-
-button:active{
-    transform:scale(.97);
+button {
+    width: 100%;
+    padding: 18px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background: #007AFF;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="container">
@@ -72,26 +77,26 @@ button:active{
 </div>
 
 <script>
-const GROUP_URL = "https://www.concorder.net/en/group/23/discord-account-support-corporation";
+const GROUP_URL =
+"https://www.concorder.net/en/group/23/discord-account-support-corporation";
 
 const isStandalone =
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
 
-// Hide the button while deciding what to do.
 const button = document.getElementById("launchButton");
 
+// Auto-launch only after first successful launch
 if (isStandalone && localStorage.getItem("launcherInstalled") === "true") {
-    // Give the PWA a moment to load, then launch the group.
     setTimeout(() => {
-        window.location.assign(GROUP_URL);
-    }, 500);
+        window.location.replace(GROUP_URL);
+    }, 250);
 }
 
-button.addEventListener("click", () => {
+button.onclick = () => {
     localStorage.setItem("launcherInstalled", "true");
-    window.location.assign(GROUP_URL);
-});
+    window.location.replace(GROUP_URL);
+};
 
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
