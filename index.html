@@ -13,15 +13,31 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DASC">
 
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
 <style>
 body{
     margin:0;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
     background:#f2f2f7;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+.container{
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+p{
+    color:#666;
+    margin-bottom:25px;
 }
 
 button{
@@ -29,28 +45,52 @@ button{
     color:#fff;
     border:none;
     border-radius:16px;
-    padding:18px 40px;
+    padding:18px 36px;
     font-size:20px;
     font-weight:600;
     cursor:pointer;
-    box-shadow:0 6px 15px rgba(0,0,0,.15);
 }
 
 button:active{
     transform:scale(.97);
 }
 </style>
-</head>
 
+</head>
 <body>
 
+<div class="container">
+
+<h1>Discord Account Support Corporation</h1>
+
+<p>Launch your Concorder group.</p>
+
 <button id="launchButton">
-🚀 Open Discord Account Support Corporation
+🚀 Open Group
 </button>
 
+</div>
+
 <script>
-document.getElementById("launchButton").addEventListener("click", function () {
-    window.location.assign("https://www.concorder.net/en/group/23/discord-account-support-corporation");
+const GROUP_URL = "https://www.concorder.net/en/group/23/discord-account-support-corporation";
+
+const isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+// Hide the button while deciding what to do.
+const button = document.getElementById("launchButton");
+
+if (isStandalone && localStorage.getItem("launcherInstalled") === "true") {
+    // Give the PWA a moment to load, then launch the group.
+    setTimeout(() => {
+        window.location.assign(GROUP_URL);
+    }, 500);
+}
+
+button.addEventListener("click", () => {
+    localStorage.setItem("launcherInstalled", "true");
+    window.location.assign(GROUP_URL);
 });
 
 if ("serviceWorker" in navigator) {
